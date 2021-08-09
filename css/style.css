@@ -79,6 +79,10 @@ thead
     background: rgb(31, 31, 31);
     color: white;
 }
+tr :hover
+{
+    opacity: 60%;
+}
 tbody tr :nth-child(1)
 {
     font-weight: 700;
