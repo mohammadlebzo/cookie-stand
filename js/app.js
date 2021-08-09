@@ -1,320 +1,141 @@
 'use strict'
-let purchCookPerH = ['6am:', '7am:', '8am:', '9am:', '10am:', '11am:', '12am:', '1pm:', '2pm:', '3pm:', '4pm:', '5pm:', '6pm:', '7pm:', 'Total:'];
+let purchCookPerH = ['6am:', '7am:', '8am:', '9am:', '10am:', '11am:', '12am:', '1pm:', '2pm:', '3pm:', '4pm:', '5pm:', '6pm:', '7pm:', 'Daily Location Total:'];
+let stores = [];
+let totalPerH_Stores = [];
 
-let Seattle = {
-    minCustPerH: 23,
-    maxCustPerH: 65,
-    avgCookiePerSale:6.3,
+let output = document.getElementById('output');
+let tableEl = document.createElement('table');
+output.appendChild(tableEl);
 
-    randCustPerH: function()
-    {
-        let min = Math.ceil(this.minCustPerH);
-        let max = Math.floor(this.maxCustPerH);
-        return Math.floor(Math.random() * (max - min + 1) + min);
-    },
-
-    salesOutput:[],
-    salesPerH: function()
-    {
-        let sumOfSales = 0;
+////Constructor::::
+function StoresLocation(location, minCustPerH, maxCustPerH, avgCookiePerSale, )
+{
+    this.location = location;
+    this.minCustPerH = minCustPerH;
+    this.maxCustPerH = maxCustPerH;
+    this.avgCookiePerSale = avgCookiePerSale;
+    this.salesOutput = [];
+    stores.push(this);
+}
+////Used to select a random number of customers::::
+StoresLocation.prototype.randCustPerH = function()
+{
+    let min = Math.ceil(this.minCustPerH);
+    let max = Math.floor(this.maxCustPerH);
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
+////Used to fill the store info about how many cookies were sold / hour / store::::
+StoresLocation.prototype.salesPerH = function()
+{
+    let sumOfSales = 0;
         for(let i = 0; i < purchCookPerH.length; i++)
         {
             if(i == (purchCookPerH.length - 1))
             {
-                this.salesOutput[i] = `${purchCookPerH[i]} ${sumOfSales} cookies`
-            }else{
-                let sales = Math.ceil(this.randCustPerH() * this.avgCookiePerSale);
-            // console.log(`sales ${sales}`);
-            this.salesOutput[i] = `${purchCookPerH[i]} ${sales} cookies`;
+                this.salesOutput[i] = sumOfSales;
+            }
+            else
+            {
+            let sales = Math.ceil(this.randCustPerH() * this.avgCookiePerSale);
+            this.salesOutput[i] = sales;
             sumOfSales += sales;
-            // console.log(sumOfSales);
             }
         }
+        
         this.messageTotal = `Total: ${sumOfSales} cookies`
         return this.salesOutput
-    },
-    // printLogSalesPerH: function()
-    // {
-    //     console.log('Seattle');
-    //     for(let i = 0; i < this.salesOutput.length; i++)
-    //     {
-    //         console.log(this.salesOutput[i]);
-    //     }
-    //     console.log(Seattle.salesPerH()[1]);
-    // },
-    output: function()
+}
+////Used to calculate the total of sold cookies / hour for all stors:::: 
+function calTotalPerH_Stores()
+{
+    for(let k = 0; k < stores[0].salesOutput.length; k++)
     {
-        let location = 'Seattle:';
-        this.salesPerH();
-        let divEl = document.getElementById('output1');
-        let h2El = document.createElement('h2');
-        h2El.textContent = location;
-        divEl.appendChild(h2El);
-        let ulEl = document.createElement('ul');
-        for(let i = 0; i < this.salesOutput.length; i++)
+        totalPerH_Stores[k] = 0;
+    }
+    for(let i = 0; i < stores.length; i++)
+    {
+        for(let j = 0; j < stores[0].salesOutput.length; j++)
         {
-            let liEl = document.createElement('li');
-            liEl.textContent = this.salesOutput[i];
-            ulEl.appendChild(liEl);
+            totalPerH_Stores[j] += stores[i].salesOutput[j];
         }
-        divEl.appendChild(ulEl);
-    },
+        
+    }
+    // console.log(totalPerH_Stores);
+}
+
+////Used to render the head of the table::::
+function renderTableHead()
+{
+    let theadEl = document.createElement('thead');
+    let trEl = document.createElement('tr');
+    let thElEmpty = document.createElement('th');
+    thElEmpty.textContent = "";
+    trEl.appendChild(thElEmpty);
+    for(let i = 0; i < purchCookPerH.length; i++)
+    {
+        let thEl = document.createElement('th');
+        thEl.textContent = purchCookPerH[i];
+        trEl.appendChild(thEl);
+    }
+    theadEl.appendChild(trEl);
+    tableEl.appendChild(theadEl);
+}
+
+////Used to render the body of the table::::
+StoresLocation.prototype.renderTableBody = function()
+{
+    this.salesPerH();
     
-};
-// Seattle.salesPerH();
-// Seattle.printLogSalesPerH();
-
-
-let Tokyo = {
-    minCustPerH: 3,
-    maxCustPerH: 24,
-    avgCookiePerSale:1.2,
-
-    randCustPerH: function()
+    let tbodyEl = document.createElement('tbody');
+    let trEl = document.createElement('tr');
+    let tdElLocation = document.createElement('td');
+    tdElLocation.textContent = this.location;
+    trEl.appendChild(tdElLocation);
+    for(let i = 0; i < this.salesOutput.length; i++)
     {
-        let min = Math.ceil(this.minCustPerH);
-        let max = Math.floor(this.maxCustPerH);
-        return Math.floor(Math.random() * (max - min + 1) + min);
-    },
+        let tdEl = document.createElement('td');
+        tdEl.textContent = this.salesOutput[i];
+        trEl.appendChild(tdEl);
+    }
+    tbodyEl.appendChild(trEl);
+    tableEl.appendChild(tbodyEl);
+}
 
-    salesOutput:[],
-    salesPerH: function()
+////Used to render the footer of the table::::
+function renderTableFooter()
+{
+    calTotalPerH_Stores();
+    let tfootEl = document.createElement('tfoot');
+    let trEl = document.createElement('tr');
+    let tdElTotal = document.createElement('td');
+    tdElTotal.textContent = "Total";
+    trEl.appendChild(tdElTotal);
+    for(let i = 0; i < purchCookPerH.length; i++)
     {
-        let sumOfSales = 0;
-        for(let i = 0; i < purchCookPerH.length; i++)
-        {
-            if(i == (purchCookPerH.length - 1))
-            {
-                this.salesOutput[i] = `${purchCookPerH[i]} ${sumOfSales} cookies`
-            }else{
-                let sales = Math.ceil(this.randCustPerH() * this.avgCookiePerSale);
-            // console.log(`sales ${sales}`);
-            this.salesOutput[i] = `${purchCookPerH[i]} ${sales} cookies`;
-            sumOfSales += sales;
-            // console.log(sumOfSales);
-            }
-        }
-        this.messageTotal = `Total: ${sumOfSales} cookies`
-        return this.salesOutput
-    },
-    // printLogSalesPerH: function()
-    // {
-    //     console.log('Tokyo');
-    //     for(let i = 0; i < this.salesOutput.length; i++)
-    //     {
-    //         console.log(this.salesOutput[i]);
-    //     }
-    //     console.log(Seattle.salesPerH()[1]);
-    // },
-    output: function()
-    {
-        let location = 'Tokyo:';
-        this.salesPerH();
-        let divEl = document.getElementById('output2');
-        let h2El = document.createElement('h2');
-        h2El.textContent = location;
-        divEl.appendChild(h2El);
-        let ulEl = document.createElement('ul');
-        for(let i = 0; i < this.salesOutput.length; i++)
-        {
-            let liEl = document.createElement('li');
-            liEl.textContent = this.salesOutput[i];
-            ulEl.appendChild(liEl);
-        }
-        divEl.appendChild(ulEl);
-    },
-};
-// Tokyo.salesPerH();
-// Tokyo.printLogSalesPerH();
+        let tdEl = document.createElement('td');
+        tdEl.textContent = totalPerH_Stores[i];
+        trEl.appendChild(tdEl);
+    }
+    tfootEl.appendChild(trEl);
+    tableEl.appendChild(tfootEl);
+}
 
-let Dubai = {
-    minCustPerH: 11,
-    maxCustPerH: 38,
-    avgCookiePerSale:3.7,
-
-    randCustPerH: function()
+////Used to render the entier table::::
+function render()
+{
+    renderTableHead();
+    for(let i = 0; i < stores.length; i++)
     {
-        let min = Math.ceil(this.minCustPerH);
-        let max = Math.floor(this.maxCustPerH);
-        return Math.floor(Math.random() * (max - min + 1) + min);
-    },
+        stores[i].renderTableBody();
+    }
+    renderTableFooter();
+}
 
-    salesOutput:[],
-    salesPerH: function()
-    {
-        let sumOfSales = 0;
-        for(let i = 0; i < purchCookPerH.length; i++)
-        {
-            if(i == (purchCookPerH.length - 1))
-            {
-                this.salesOutput[i] = `${purchCookPerH[i]} ${sumOfSales} cookies`
-            }else{
-                let sales = Math.ceil(this.randCustPerH() * this.avgCookiePerSale);
-            // console.log(`sales ${sales}`);
-            this.salesOutput[i] = `${purchCookPerH[i]} ${sales} cookies`;
-            sumOfSales += sales;
-            // console.log(sumOfSales);
-            }
-        }
-        this.messageTotal = `Total: ${sumOfSales} cookies`
-        return this.salesOutput
-    },
-    // printLogSalesPerH: function()
-    // {
-    //     console.log('Dubai');
-    //     for(let i = 0; i < this.salesOutput.length; i++)
-    //     {
-    //         console.log(this.salesOutput[i]);
-    //     }
-    //     console.log(Seattle.salesPerH()[1]);
-    // },
-    output: function()
-    {
-        let location = 'Dubai:';
-        this.salesPerH();
-        let divEl = document.getElementById('output3');
-        let h2El = document.createElement('h2');
-        h2El.textContent = location;
-        divEl.appendChild(h2El);
-        let ulEl = document.createElement('ul');
-        for(let i = 0; i < this.salesOutput.length; i++)
-        {
-            let liEl = document.createElement('li');
-            liEl.textContent = this.salesOutput[i];
-            ulEl.appendChild(liEl);
-        }
-        divEl.appendChild(ulEl);
-    },
-};
-// Dubai.salesPerH();
-// Dubai.printLogSalesPerH();
+////Making new objects and using the render() function::::
+new StoresLocation('Seattle', 23, 65, 6.3);
+new StoresLocation('Tokyo', 3, 24, 1.2);
+new StoresLocation('Dubai', 11, 38, 3.7);
+new StoresLocation('Paris', 20, 38, 2.3);
+new StoresLocation('Lima', 2, 16, 4.6);
+render();
 
-let Paris = {
-    minCustPerH: 20,
-    maxCustPerH: 38,
-    avgCookiePerSale:2.3,
-
-    randCustPerH: function()
-    {
-        let min = Math.ceil(this.minCustPerH);
-        let max = Math.floor(this.maxCustPerH);
-        return Math.floor(Math.random() * (max - min + 1) + min);
-    },
-
-    salesOutput:[],
-    salesPerH: function()
-    {
-        let sumOfSales = 0;
-        for(let i = 0; i < purchCookPerH.length; i++)
-        {
-            if(i == (purchCookPerH.length - 1))
-            {
-                this.salesOutput[i] = `${purchCookPerH[i]} ${sumOfSales} cookies`
-            }else{
-                let sales = Math.ceil(this.randCustPerH() * this.avgCookiePerSale);
-            // console.log(`sales ${sales}`);
-            this.salesOutput[i] = `${purchCookPerH[i]} ${sales} cookies`;
-            sumOfSales += sales;
-            // console.log(sumOfSales);
-            }
-        }
-        this.messageTotal = `Total: ${sumOfSales} cookies`
-        return this.salesOutput
-    },
-    // printLogSalesPerH: function()
-    // {
-    //     console.log('Paris');
-    //     for(let i = 0; i < this.salesOutput.length; i++)
-    //     {
-    //         console.log(this.salesOutput[i]);
-    //     }
-    //     console.log(Seattle.salesPerH()[1]);
-    // },
-    output: function()
-    {
-        let location = 'Paris:';
-        this.salesPerH();
-        let divEl = document.getElementById('output4');
-        let h2El = document.createElement('h2');
-        h2El.textContent = location;
-        divEl.appendChild(h2El);
-        let ulEl = document.createElement('ul');
-        for(let i = 0; i < this.salesOutput.length; i++)
-        {
-            let liEl = document.createElement('li');
-            liEl.textContent = this.salesOutput[i];
-            ulEl.appendChild(liEl);
-        }
-        divEl.appendChild(ulEl);
-    },
-};
-// Paris.salesPerH();
-// Paris.printLogSalesPerH();
-
-let Lima = {
-    minCustPerH: 2,
-    maxCustPerH: 16,
-    avgCookiePerSale:4.6,
-
-    randCustPerH: function()
-    {
-        let min = Math.ceil(this.minCustPerH);
-        let max = Math.floor(this.maxCustPerH);
-        return Math.floor(Math.random() * (max - min + 1) + min);
-    },
-
-    salesOutput:[],
-    salesPerH: function()
-    {
-        let sumOfSales = 0;
-        for(let i = 0; i < purchCookPerH.length; i++)
-        {
-            if(i == (purchCookPerH.length - 1))
-            {
-                this.salesOutput[i] = `${purchCookPerH[i]} ${sumOfSales} cookies`
-            }else{
-                let sales = Math.ceil(this.randCustPerH() * this.avgCookiePerSale);
-            // console.log(`sales ${sales}`);
-            this.salesOutput[i] = `${purchCookPerH[i]} ${sales} cookies`;
-            sumOfSales += sales;
-            // console.log(sumOfSales);
-            }
-        }
-        this.messageTotal = `Total: ${sumOfSales} cookies`
-        return this.salesOutput
-    },
-    // printLogSalesPerH: function()
-    // {
-    //     console.log('Lima');
-    //     for(let i = 0; i < this.salesOutput.length; i++)
-    //     {
-    //         console.log(this.salesOutput[i]);
-    //     }
-    //     console.log(Seattle.salesPerH()[1]);
-    // },
-    output: function()
-    {
-        let location = 'Lima:';
-        this.salesPerH();
-        let divEl = document.getElementById('output5');
-        let h2El = document.createElement('h2');
-        h2El.textContent = location;
-        divEl.appendChild(h2El);
-        let ulEl = document.createElement('ul');
-        for(let i = 0; i < this.salesOutput.length; i++)
-        {
-            let liEl = document.createElement('li');
-            liEl.textContent = this.salesOutput[i];
-            ulEl.appendChild(liEl);
-        }
-        divEl.appendChild(ulEl);
-    },
-}   
-// Lima.salesPerH();
-// Lima.printLogSalesPerH();
-
-Seattle.output();
-Tokyo.output();
-Dubai.output();
-Paris.output();
-Lima.output();
