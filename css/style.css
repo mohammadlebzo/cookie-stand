@@ -30,10 +30,7 @@ header .nav-bar .logo-img img
     width: 100px;
 }
 
-main
-{
-    display: flex;
-}
+
 main .underC
 {
     position: absolute;
@@ -45,15 +42,11 @@ main .underC
 main .output
 {
     line-height: 20px;
-    padding-left: 30px;
+    margin-left: 10%;
     margin-top: 50px;
     font-family: 'Arial';
 }
-main .output h2
-{
-    margin: 0 0 0 -15px;
-    font-family: 'Georgia';
-}
+
 
 footer
 {
@@ -72,4 +65,33 @@ footer p
 ul, ol
 {
     list-style-type: disc;
+}
+table, tr, td, th
+{
+    
+    border: 1px solid black;
+    padding: 10px;
+    empty-cells: show;
+}
+thead
+{
+    font-weight: 700;
+    background: rgb(31, 31, 31);
+    color: white;
+}
+tbody tr :nth-child(1)
+{
+    font-weight: 700;
+    background: rgb(31, 31, 31);
+    color: white;
+}
+tbody tr :last-child
+{
+    font-weight: 700;
+    background: rgb(104, 203, 236);
+}
+tfoot
+{
+    font-weight: 700;
+    background: rgb(104, 203, 236);
 }
