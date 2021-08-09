@@ -1,4 +1,6 @@
 'use strict'
+let purchCookPerH = ['6am:', '7am:', '8am:', '9am:', '10am:', '11am:', '12am:', '1pm:', '2pm:', '3pm:', '4pm:', '5pm:', '6pm:', '7pm:', 'Total:'];
+
 let Seattle = {
     minCustPerH: 23,
     maxCustPerH: 65,
@@ -6,25 +8,24 @@ let Seattle = {
 
     randCustPerH: function()
     {
-        this.minCustPerH = Math.ceil(this.minCustPerH);
-        this.maxCustPerH = Math.floor(this.maxCustPerH);
-        return Math.floor(Math.random() * (this.maxCustPerH - this.minCustPerH + 1) + this.minCustPerH);
+        let min = Math.ceil(this.minCustPerH);
+        let max = Math.floor(this.maxCustPerH);
+        return Math.floor(Math.random() * (max - min + 1) + min);
     },
 
-    purchCookPerH: ['6am:', '7am:', '8am:', '9am:', '10am:', '11am:', '12am:', '1pm:', '2pm:', '3pm:', '4pm:', '5pm:', '6pm:', '7pm:', 'Total:'],
     salesOutput:[],
     salesPerH: function()
     {
         let sumOfSales = 0;
-        for(let i = 0; i < this.purchCookPerH.length; i++)
+        for(let i = 0; i < purchCookPerH.length; i++)
         {
-            if(i == (this.purchCookPerH.length - 1))
+            if(i == (purchCookPerH.length - 1))
             {
-                this.salesOutput[i] = `${this.purchCookPerH[i]} ${sumOfSales} cookies`
+                this.salesOutput[i] = `${purchCookPerH[i]} ${sumOfSales} cookies`
             }else{
-                let sales = Math.round(this.randCustPerH() * this.avgCookiePerSale);
+                let sales = Math.ceil(this.randCustPerH() * this.avgCookiePerSale);
             // console.log(`sales ${sales}`);
-            this.salesOutput[i] = `${this.purchCookPerH[i]} ${sales} cookies`;
+            this.salesOutput[i] = `${purchCookPerH[i]} ${sales} cookies`;
             sumOfSales += sales;
             // console.log(sumOfSales);
             }
@@ -71,25 +72,24 @@ let Tokyo = {
 
     randCustPerH: function()
     {
-        this.minCustPerH = Math.ceil(this.minCustPerH);
-        this.maxCustPerH = Math.floor(this.maxCustPerH);
-        return Math.floor(Math.random() * (this.maxCustPerH - this.minCustPerH + 1) + this.minCustPerH);
+        let min = Math.ceil(this.minCustPerH);
+        let max = Math.floor(this.maxCustPerH);
+        return Math.floor(Math.random() * (max - min + 1) + min);
     },
 
-    purchCookPerH: ['6am:', '7am:', '8am:', '9am:', '10am:', '11am:', '12am:', '1pm:', '2pm:', '3pm:', '4pm:', '5pm:', '6pm:', '7pm:', 'Total:'],
     salesOutput:[],
     salesPerH: function()
     {
         let sumOfSales = 0;
-        for(let i = 0; i < this.purchCookPerH.length; i++)
+        for(let i = 0; i < purchCookPerH.length; i++)
         {
-            if(i == (this.purchCookPerH.length - 1))
+            if(i == (purchCookPerH.length - 1))
             {
-                this.salesOutput[i] = `${this.purchCookPerH[i]} ${sumOfSales} cookies`
+                this.salesOutput[i] = `${purchCookPerH[i]} ${sumOfSales} cookies`
             }else{
-                let sales = Math.round(this.randCustPerH() * this.avgCookiePerSale);
+                let sales = Math.ceil(this.randCustPerH() * this.avgCookiePerSale);
             // console.log(`sales ${sales}`);
-            this.salesOutput[i] = `${this.purchCookPerH[i]} ${sales} cookies`;
+            this.salesOutput[i] = `${purchCookPerH[i]} ${sales} cookies`;
             sumOfSales += sales;
             // console.log(sumOfSales);
             }
@@ -134,25 +134,24 @@ let Dubai = {
 
     randCustPerH: function()
     {
-        this.minCustPerH = Math.ceil(this.minCustPerH);
-        this.maxCustPerH = Math.floor(this.maxCustPerH);
-        return Math.floor(Math.random() * (this.maxCustPerH - this.minCustPerH + 1) + this.minCustPerH);
+        let min = Math.ceil(this.minCustPerH);
+        let max = Math.floor(this.maxCustPerH);
+        return Math.floor(Math.random() * (max - min + 1) + min);
     },
 
-    purchCookPerH: ['6am:', '7am:', '8am:', '9am:', '10am:', '11am:', '12am:', '1pm:', '2pm:', '3pm:', '4pm:', '5pm:', '6pm:', '7pm:', 'Total:'],
     salesOutput:[],
     salesPerH: function()
     {
         let sumOfSales = 0;
-        for(let i = 0; i < this.purchCookPerH.length; i++)
+        for(let i = 0; i < purchCookPerH.length; i++)
         {
-            if(i == (this.purchCookPerH.length - 1))
+            if(i == (purchCookPerH.length - 1))
             {
-                this.salesOutput[i] = `${this.purchCookPerH[i]} ${sumOfSales} cookies`
+                this.salesOutput[i] = `${purchCookPerH[i]} ${sumOfSales} cookies`
             }else{
-                let sales = Math.round(this.randCustPerH() * this.avgCookiePerSale);
+                let sales = Math.ceil(this.randCustPerH() * this.avgCookiePerSale);
             // console.log(`sales ${sales}`);
-            this.salesOutput[i] = `${this.purchCookPerH[i]} ${sales} cookies`;
+            this.salesOutput[i] = `${purchCookPerH[i]} ${sales} cookies`;
             sumOfSales += sales;
             // console.log(sumOfSales);
             }
@@ -197,25 +196,24 @@ let Paris = {
 
     randCustPerH: function()
     {
-        this.minCustPerH = Math.ceil(this.minCustPerH);
-        this.maxCustPerH = Math.floor(this.maxCustPerH);
-        return Math.floor(Math.random() * (this.maxCustPerH - this.minCustPerH + 1) + this.minCustPerH);
+        let min = Math.ceil(this.minCustPerH);
+        let max = Math.floor(this.maxCustPerH);
+        return Math.floor(Math.random() * (max - min + 1) + min);
     },
 
-    purchCookPerH: ['6am:', '7am:', '8am:', '9am:', '10am:', '11am:', '12am:', '1pm:', '2pm:', '3pm:', '4pm:', '5pm:', '6pm:', '7pm:', 'Total:'],
     salesOutput:[],
     salesPerH: function()
     {
         let sumOfSales = 0;
-        for(let i = 0; i < this.purchCookPerH.length; i++)
+        for(let i = 0; i < purchCookPerH.length; i++)
         {
-            if(i == (this.purchCookPerH.length - 1))
+            if(i == (purchCookPerH.length - 1))
             {
-                this.salesOutput[i] = `${this.purchCookPerH[i]} ${sumOfSales} cookies`
+                this.salesOutput[i] = `${purchCookPerH[i]} ${sumOfSales} cookies`
             }else{
-                let sales = Math.round(this.randCustPerH() * this.avgCookiePerSale);
+                let sales = Math.ceil(this.randCustPerH() * this.avgCookiePerSale);
             // console.log(`sales ${sales}`);
-            this.salesOutput[i] = `${this.purchCookPerH[i]} ${sales} cookies`;
+            this.salesOutput[i] = `${purchCookPerH[i]} ${sales} cookies`;
             sumOfSales += sales;
             // console.log(sumOfSales);
             }
@@ -260,25 +258,24 @@ let Lima = {
 
     randCustPerH: function()
     {
-        this.minCustPerH = Math.ceil(this.minCustPerH);
-        this.maxCustPerH = Math.floor(this.maxCustPerH);
-        return Math.floor(Math.random() * (this.maxCustPerH - this.minCustPerH + 1) + this.minCustPerH);
+        let min = Math.ceil(this.minCustPerH);
+        let max = Math.floor(this.maxCustPerH);
+        return Math.floor(Math.random() * (max - min + 1) + min);
     },
 
-    purchCookPerH: ['6am:', '7am:', '8am:', '9am:', '10am:', '11am:', '12am:', '1pm:', '2pm:', '3pm:', '4pm:', '5pm:', '6pm:', '7pm:', 'Total:'],
     salesOutput:[],
     salesPerH: function()
     {
         let sumOfSales = 0;
-        for(let i = 0; i < this.purchCookPerH.length; i++)
+        for(let i = 0; i < purchCookPerH.length; i++)
         {
-            if(i == (this.purchCookPerH.length - 1))
+            if(i == (purchCookPerH.length - 1))
             {
-                this.salesOutput[i] = `${this.purchCookPerH[i]} ${sumOfSales} cookies`
+                this.salesOutput[i] = `${purchCookPerH[i]} ${sumOfSales} cookies`
             }else{
-                let sales = Math.round(this.randCustPerH() * this.avgCookiePerSale);
+                let sales = Math.ceil(this.randCustPerH() * this.avgCookiePerSale);
             // console.log(`sales ${sales}`);
-            this.salesOutput[i] = `${this.purchCookPerH[i]} ${sales} cookies`;
+            this.salesOutput[i] = `${purchCookPerH[i]} ${sales} cookies`;
             sumOfSales += sales;
             // console.log(sumOfSales);
             }
