@@ -1,44 +1,50 @@
+*
+{
+    box-sizing: border-box;
+}
 body 
 {
     font-family: 'Archivo', sans-serif;
     background: rgb(236, 236, 236);
+    /* position: relative; */
+    background-color: peachpuff;
 }
+/* header, nav-bar START */
 header
 {
     width: 100%;
-    height: 50px;
+    height: 60px;
     border-bottom: 1px solid black;
-    line-height: 50px;
-}
-header .nav-bar
-{
+    line-height: 60px;
     background-color: lightblue;
+}
+header .nav-bar ul
+{
+    height: 59px;
     display: flex;
 }
-header .nav-bar a
+header .nav-bar ul li
 {
     padding-left: 10px;
     padding-right: 10px;
+    list-style-type: none;
+}
+header .nav-bar ul li a
+{
     text-decoration: none;
 }
-header .nav-bar a:hover
-{
-    background: rgb(104, 203, 236);
-}
-header .nav-bar .logo-img img
+header .nav-bar ul li img
 {
     width: 100px;
+    margin-top: 10px;
 }
-
-
-main .underC
+header .nav-bar li:hover:not(:nth-child(1))
 {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    font-size: 30px;
-    margin: 0 0 0 -135px;
+    background: rgb(146, 41, 41);
 }
+/* header, nav-bar END */
+
+/* main, output START */
 main .output
 {
     line-height: 20px;
@@ -46,26 +52,101 @@ main .output
     margin-top: 50px;
     font-family: 'Arial';
 }
+main .page-top
+{
+    margin-top: 20px;
+    
+}
+main .page-top .top-mid-text
+{
+    width: 33.33%;
+    text-align: center;
+    float: left;
+    margin-top: 80px;
+}
+main .page-top .top-mid-text img
+{
+    width: 200px;
+    height: 100px;
+}
+main .page-top .img1
+{
+    width: 33.33%;
+    float: left;
+}
+main .page-top .img2
+{
+    width: 33.33%;
+    float: right;
+}
+main .mid-text
+{
+    clear: both;
+    padding-top: 30px;
+    display: flex;
+}
+main .mid-text img
+{
+    width: 50%;
+}
+main .mid-text p
+{
+    margin-left: 20px;
+    margin-top: 40px;
+}
+/* main, output END */
 
-
+/* footer START */
 footer
 {
-    background-color: lightblue;
+    display: flex;
+    /* position: absolute; */
     width: 100%;
-    height: 50px;
-    position: absolute;
+    height: 250px;
+    clear: both;
     bottom: 0px;
     line-height: 50px;
-    border-top: 1px solid black;
+    /* background-color: black; */
+    bottom: 0;
+    color: black;
+    line-height: 20px;
+    font-size: 12px;
+    font-family: 'Arial';
+    margin-top: 30px;
 }
-footer p
+footer address
 {
-    text-align: center;
+    display: flex;
 }
-ul, ol
+footer address .foot-address
 {
-    list-style-type: disc;
+    margin-top: 30px;
+    margin-left: 20px;
 }
+footer address img
+{
+    width: 300px;
+    margin-top: 10px;
+}
+footer .merch
+{ 
+    float: right;
+    display: flex;
+    margin-left: 50px;
+}
+footer .merch div
+{
+    margin: 30px;
+}
+footer .merch img
+{
+    width: 200px;
+    height: 200px;
+}
+
+/* footer END */
+
+/* table's properties(Code) START*/
 table, tr, td, th
 {
     
@@ -99,3 +180,37 @@ tfoot
     font-weight: 700;
     background: rgb(104, 203, 236);
 }
+/* table's properties(Code) END*/
+
+/* General selectors START */
+ul, ol
+{
+    list-style-type: disc;
+}
+img
+{
+    width: 100%;
+}
+main img
+{
+    height: 300px;
+    border: 5px solid rgb(163, 139, 0);
+    border-radius: 3px;
+}
+h2
+{
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+h3
+{
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+hr
+{
+    background-color: black;
+    width: 4px;
+    border-radius: 5px;
+}
+/* General selectors END */
