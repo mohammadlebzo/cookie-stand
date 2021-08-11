@@ -48,9 +48,12 @@ header .nav-bar li:hover:not(:nth-child(1))
 main .output
 {
     line-height: 20px;
-    margin-left: 10%;
+    margin-left: 5%;
+    margin-right: 5%;
     margin-top: 50px;
+    margin-bottom: 50px;
     font-family: 'Arial';
+    overflow-x: auto;
 }
 main .page-top
 {
@@ -158,6 +161,12 @@ table, tr, td, th
     padding: 10px;
     empty-cells: show;
 }
+table
+{
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+}
 thead
 {
     font-weight: 700;
@@ -217,4 +226,17 @@ hr
     width: 4px;
     border-radius: 5px;
 }
+form
+{
+    margin-left: 5%;
+    margin-right: 5%;
+    border: 2px solid black;
+}
+fieldset :not(legend)
+{
+    margin-left: 30px;
+}
+input:invalid:required {
+    background-image: linear-gradient(to right, lightgreen);
+  }
 /* General selectors END */
