@@ -6,9 +6,11 @@ let totalPerH_Stores = [];
 let output = document.getElementById('output');
 let tableEl = document.createElement('table');
 output.appendChild(tableEl);
+let formEl = document.getElementById('storeForm')
+formEl.addEventListener('submit', addStore);
 
 ////Constructor::::
-function StoresLocation(location, minCustPerH, maxCustPerH, avgCookiePerSale, )
+function StoresLocation(location, minCustPerH, maxCustPerH, avgCookiePerSale)
 {
     this.location = location;
     this.minCustPerH = minCustPerH;
@@ -58,6 +60,10 @@ function calTotalPerH_Stores()
         {
             totalPerH_Stores[j] += stores[i].salesOutput[j];
         }
+        // for(let d = 0; d < totalPerH_Stores.length; d++)
+        // {
+        //     console.log(totalPerH_Stores[d]);
+        // }
         
     }
     // console.log(totalPerH_Stores);
@@ -106,6 +112,7 @@ function renderTableFooter()
 {
     calTotalPerH_Stores();
     let tfootEl = document.createElement('tfoot');
+    tfootEl.setAttribute("id", "foot");
     let trEl = document.createElement('tr');
     let tdElTotal = document.createElement('td');
     tdElTotal.textContent = "Total";
@@ -120,6 +127,17 @@ function renderTableFooter()
     tableEl.appendChild(tfootEl);
 }
 
+function deletefootChild() {
+    let tfootEl = document.getElementById('foot');
+    
+    // let child = tfootEl.lastElementChild; 
+    // while (child) {
+    //     tfootEl.removeChild(child);
+    //     child = tfootEl.lastElementChild;
+    // }
+    tfootEl.remove();
+}
+
 ////Used to render the entier table::::
 function render()
 {
@@ -129,6 +147,22 @@ function render()
         stores[i].renderTableBody();
     }
     renderTableFooter();
+}
+
+function addStore(event)
+{
+    event.preventDefault();
+    let locarion = event.target.location.value;
+    let minCust = event.target.minCust.value;
+    let maxCust = event.target.maxCust.value;
+    let avg = event.target.avg.value;
+
+    let newStore = new StoresLocation(locarion, minCust, maxCust, avg);
+    newStore.renderTableBody();
+    deletefootChild();
+    renderTableFooter();
+    document.getElementById("storeForm").reset();
+    // console.log(stores);
 }
 
 ////Making new objects and using the render() function::::
