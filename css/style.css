@@ -94,6 +94,10 @@ main .mid-text p
     margin-left: 20px;
     margin-top: 40px;
 }
+main .mid-text p span
+{
+    font-size: 20px;
+}
 /* main, output END */
 
 /* footer START */
