@@ -4,14 +4,15 @@
 }
 body 
 {
-    font-family: 'Archivo', sans-serif;
-    background: rgb(236, 236, 236);
+    
+    /* background: rgb(236, 236, 236); */
     /* position: relative; */
     background-color: peachpuff;
 }
 /* header, nav-bar START */
 header
 {
+    font-family: 'Archivo', sans-serif;
     width: 100%;
     height: 60px;
     border-bottom: 1px solid black;
@@ -31,6 +32,7 @@ header .nav-bar ul li
 }
 header .nav-bar ul li a
 {
+    color: black;
     text-decoration: none;
 }
 header .nav-bar ul li img
@@ -45,8 +47,14 @@ header .nav-bar li:hover:not(:nth-child(1))
 /* header, nav-bar END */
 
 /* main, output START */
+main
+{
+    font-family: 'Times';
+    color: brown;
+}
 main .output
 {
+    color:darkgoldenrod;
     line-height: 20px;
     margin-left: 5%;
     margin-right: 5%;
@@ -106,6 +114,7 @@ main .mid-text p span
 /* footer START */
 footer
 {
+
     display: flex;
     /* position: absolute; */
     width: 100%;
@@ -236,7 +245,7 @@ fieldset :not(legend)
 {
     margin-left: 30px;
 }
-input:invalid:required {
+/* input:invalid:required {
     background-image: linear-gradient(to right, lightgreen);
-  }
+  } */
 /* General selectors END */
